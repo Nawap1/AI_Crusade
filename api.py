@@ -54,13 +54,13 @@ async def set_audio(request: SetContextRequest):
     context_storage["transcript"] = request.context
     return {"message": "Context set successfully."}
 
-@app.get("/reading_test", response_model=FeedbackResponse)
+@app.post("/reading_test", response_model=FeedbackResponse)
 async def reading_test(
     question: str = Query(..., description="The query based on the given context."),
     answer: str = Query(..., description="The response provided by the user.")
 ):
     """
-    GET endpoint for the reading test evaluation.
+    Post endpoint for the reading test evaluation.
     Takes question and answer as input, uses stored context, and returns feedback.
     """
     context = context_storage.get("context")
